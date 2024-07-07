@@ -1,7 +1,8 @@
 import Foundation
 
 struct LunarComic: Encodable {
-	var Code: String
+	let id = UUID()
+    var Code: String
 	var	AlternateLunarCode: String
 	var Title: String
 	var MainDesc: String
@@ -19,9 +20,9 @@ struct LunarComic: Encodable {
 	var Writer: [String]
 	var Artist: [String]
 	var CoverArtist: String
-	var InitialOrderDue: Date
-	var FOCDate: Date
-	var InStoreDate: Date
+	var InitialOrderDue: String
+	var FOCDate: String
+	var InStoreDate: String
 	var ParentCode: String
 	var PageNumber: Int
 	var NumberOfPages: Int
