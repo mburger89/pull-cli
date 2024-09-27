@@ -20,8 +20,10 @@ struct plCSVParse: ParsableCommand {
 		var file: String
 		@Option(name: .shortAndLong, help: "Specify the url to upload to")
 		var url: String
+		@Option(name: .shortAndLong, help: "Specify the type of data, ie lunar or diamond")
+		var type: String
 		mutating func run() {
-			uploadComicData(file: file, url: url)
+			uploadComicData(file: file, url: url, datatype: type)
 		}
 	}
 	struct diamond: ParsableCommand {
