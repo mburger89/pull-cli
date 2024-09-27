@@ -1,6 +1,15 @@
 import Foundation
 import RegexBuilder
 
+func convertDate(str: String) -> String {
+	let dateFormatter = DateFormatter()
+	dateFormatter.dateFormat = "MM/dd/yyyy"
+	guard let d = dateFormatter.date(from: str) else {
+		return String(Date().ISO8601Format())
+	}
+	return String(d.ISO8601Format())
+}
+
 func lunarCsvtojson(file: String) {
 	var comicsList: [LunarComic] = []
 	do {
@@ -76,14 +85,6 @@ func lunarCsvtojson(file: String) {
 				Returnable: row[54],
 				ReturnWindow: row[55]
 			)
-			func convertDate(str: String) -> String {
-				let dateFormatter = DateFormatter()
-				dateFormatter.dateFormat = "MM/dd/yyyy"
-				guard let d = dateFormatter.date(from: str) else {
-					return String(Date().ISO8601Format())
-				}
-				return String(d.ISO8601Format())
-			}
 			// add to comic book list
 			comicsList.append(comicBook)
 		}

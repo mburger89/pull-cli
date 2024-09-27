@@ -7,8 +7,7 @@ import Foundation
 struct plCSVParse: ParsableCommand {
 	static let configuration = CommandConfiguration(
 		abstract: "Comic book data processor utility",
-		subcommands: [lunar.self, upload.self])
-
+		subcommands: [lunar.self, upload.self, diamond.self])
 	struct lunar: ParsableCommand {
 		@Option(name: .shortAndLong, help: "Specify file in lunar format to convert")
 		var file: String

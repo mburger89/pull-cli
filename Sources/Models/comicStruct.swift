@@ -112,6 +112,7 @@ struct DiamondComic: Codable {
 	var unit_weight: Float
 	var unit_length: Float
 	var unit_width: Float
+	var unit_height: Float
 	var case_weight: Float
 	var case_length: Float
 	var case_width: Float
