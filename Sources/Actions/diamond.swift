@@ -34,9 +34,11 @@ func decodeDiamond(file: String) {
 				box_per_case: Int(row[19]) ?? 0,
 				discount_code: String(row[20]),
 				increment: String(row[21]),
-				prnt_date: String(row[22]),
+				prnt_date: convertDate(
+					str: String(row[22].utf8) ?? ""),
 				FOC_vender: String(row[23]),
-				ship_date: String(row[24]),
+				ship_date: convertDate(
+					str: String(row[22].utf8) ?? ""),
 				srp: Float(row[25]) ?? 0.0,
 				catergory: Int(row[26]) ?? 0,
 				genre: String(row[27]),
@@ -64,7 +66,8 @@ func decodeDiamond(file: String) {
 					String($0.trimmingPrefix(" "))
 				},
 				alliance_sku: Int(row[43]) ?? 0,
-				FOC_date: String(row[44]),
+				FOC_date: convertDate(
+					str: String(row[44])),
 				offered_date: String(row[45]),
 				number_of_pages: Int(row[46]) ?? 0,
 				unit_weight: Float(row[47]) ?? 0.0,

@@ -81,7 +81,7 @@ func lunarCsvtojson(file: String) {
 				PublisherCode: row[50],
 				T_Number: row[51],
 				PublisherSeriesCode: row[52],
-				ImageUrl: URL(string: row[53])!,
+				ImageUrl: URL(string: row[53]) ?? URL(string: "https://pull-list.app")!,
 				Returnable: row[54],
 				ReturnWindow: row[55]
 			)
