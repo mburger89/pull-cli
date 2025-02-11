@@ -1,21 +1,21 @@
 {
     "configurations": [
         {
-            "type": "swift-lldb",
+            "type": "lldb",
             "request": "launch",
             "args": [],
-            "cwd": "${workspaceFolder:pl-cli}",
+            "cwd": "${workspaceFolder:pull-cli}",
             "name": "Debug plCLI",
-            "program": "${workspaceFolder:pl-cli}/.build/debug/plCLI",
+            "program": "${workspaceFolder:pull-cli}/.build/debug/plCLI",
             "preLaunchTask": "swift: Build Debug plCLI"
         },
         {
-            "type": "swift-lldb",
+            "type": "lldb",
             "request": "launch",
             "args": [],
-            "cwd": "${workspaceFolder:pl-cli}",
+            "cwd": "${workspaceFolder:pull-cli}",
             "name": "Release plCLI",
-            "program": "${workspaceFolder:pl-cli}/.build/release/plCLI",
+            "program": "${workspaceFolder:pull-cli}/.build/release/plCLI",
             "preLaunchTask": "swift: Build Release plCLI"
         }
     ]

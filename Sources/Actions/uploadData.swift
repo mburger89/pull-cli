@@ -2,16 +2,16 @@ import Foundation
 
 func uploadComicData(file: String, url: String, datatype: String) {
 	var comic_list: [Data] = []
-	let encoder = JSONEncoder()
+	let encoder: JSONEncoder = JSONEncoder()
 	if datatype == "lunar" {
 		//var comicsList: [LunarComic] = []
 		do {
-			let contents = try String(contentsOf: URL(fileURLWithPath: file))
-			let decoder = JSONDecoder()
-			guard let fileData = contents.data(using: .utf8) else { return }
+			let contents: String = try String(contentsOf: URL(fileURLWithPath: file))
+			let decoder: JSONDecoder = JSONDecoder()
+			guard let fileData: Data = contents.data(using: .utf8) else { return }
 			let jsonData: [LunarComic] = try decoder.decode([LunarComic].self, from: fileData)
-			for i in 0...jsonData.count {
-				guard let comicJSON = try? encoder.encode(jsonData[i]) else { return }
+			for i: Int in 0...jsonData.count {
+				guard let comicJSON: Data = try? encoder.encode(jsonData[i]) else { return }
 				comic_list.append(comicJSON)
 			}
 		} catch {
@@ -20,12 +20,12 @@ func uploadComicData(file: String, url: String, datatype: String) {
 	}
 	if datatype == "diamond" {
 		do {
-			let contents = try String(contentsOf: URL(fileURLWithPath: file))
-			let decoder = JSONDecoder()
-			guard let fileData = contents.data(using: .utf8) else { return }
+			let contents: String = try String(contentsOf: URL(fileURLWithPath: file))
+			let decoder: JSONDecoder = JSONDecoder()
+			guard let fileData: Data = contents.data(using: .utf8) else { return }
 			let jsonData: [DiamondComic] = try decoder.decode([DiamondComic].self, from: fileData)
-			for i in 0...jsonData.count {
-				guard let comicJSON = try? encoder.encode(jsonData[i]) else { return }
+			for i: Int in 0...jsonData.count {
+				guard let comicJSON: Data = try? encoder.encode(jsonData[i]) else { return }
 				comic_list.append(comicJSON)
 			}
 		} catch {
@@ -34,15 +34,15 @@ func uploadComicData(file: String, url: String, datatype: String) {
 	}
 
 	// upload all comics to the server
-	var request = URLRequest(url: URL(string: url)!)
+	var request: URLRequest = URLRequest(url: URL(string: url)!)
 	request.httpMethod = "POST"
 	request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-	for i in 0...comic_list.count {
+	for i: Int in 0...comic_list.count {
 		request.httpBody = comic_list[i]
-		let sema = DispatchSemaphore(value: 0)
-		let task = URLSession.shared.dataTask(with: request) {
+		let sema: DispatchSemaphore = DispatchSemaphore(value: 0)
+		let task: URLSessionDataTask = URLSession.shared.dataTask(with: request) {
 			data, response, error in
-			if let strData = String(data: data!, encoding: .utf8) {
+			if let strData: String = String(data: data!, encoding: .utf8) {
 				print(strData)
 			}
 			sema.signal()

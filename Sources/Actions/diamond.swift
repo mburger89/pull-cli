@@ -4,12 +4,12 @@ import RegexBuilder
 func decodeDiamond(file: String) {
 	var comicList: [DiamondComic] = []
 	do {
-		let contents = try String(contentsOf: URL(fileURLWithPath: file)).utf8
-		let lines = String(contents).split(separator: "\r\n")
-		let body = Array(lines[1...])
-		let reg = try Regex("\\t{1}")
-		for item in body {
-			let row = item.split(separator: reg, omittingEmptySubsequences: false)
+		let contents: String.UTF8View = try String(contentsOf: URL(fileURLWithPath: file)).utf8
+		let lines: [Substring] = String(contents).split(separator: "\r\n")
+		let body: [Substring] = Array(lines[1...])
+		let reg: Regex<AnyRegexOutput> = try Regex("\\t{1}")
+		for item: Substring in body {
+			let row: [Substring.SubSequence] = item.split(separator: reg, omittingEmptySubsequences: false)
 			let comic: DiamondComic = DiamondComic(
 				id: UUID(),
 				code: String(row[0]),
@@ -85,7 +85,7 @@ func decodeDiamond(file: String) {
 		print(error)
 	}
 	var jsonfile: URL
-	let encoder = JSONEncoder()
+	let encoder: JSONEncoder = JSONEncoder()
 	encoder.outputFormatting = .prettyPrinted
 	do {
 		jsonfile = try FileManager.default.url(

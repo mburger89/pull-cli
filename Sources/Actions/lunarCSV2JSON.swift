@@ -2,9 +2,9 @@ import Foundation
 import RegexBuilder
 
 func convertDate(str: String) -> String {
-	let dateFormatter = DateFormatter()
+	let dateFormatter: DateFormatter = DateFormatter()
 	dateFormatter.dateFormat = "MM/dd/yyyy"
-	guard let d = dateFormatter.date(from: str) else {
+	guard let d: Date = dateFormatter.date(from: str) else {
 		return String(Date().ISO8601Format())
 	}
 	return String(d.ISO8601Format())
@@ -13,13 +13,13 @@ func convertDate(str: String) -> String {
 func lunarCsvtojson(file: String) {
 	var comicsList: [LunarComic] = []
 	do {
-		let contents = try String(contentsOf: URL(fileURLWithPath: file)).utf8
-		let lines = String(contents).split(separator: "\r\n")
-		let values = Array(lines[1...])
+		let contents: String.UTF8View = try String(contentsOf: URL(fileURLWithPath: file)).utf8
+		let lines: [Substring] = String(contents).split(separator: "\r\n")
+		let values: [Substring] = Array(lines[1...])
 		// create the json objects
-		for item in values {
-			let reg = try Regex("\",")
-			let row = item.split(separator: reg).map {
+		for item: Substring in values {
+			let reg: Regex<AnyRegexOutput> = try Regex("\",")
+			let row: [String] = item.split(separator: reg).map {
 				String($0).replacingOccurrences(of: "\"", with: "")
 			}
 			let comicBook: LunarComic = LunarComic(
@@ -92,7 +92,7 @@ func lunarCsvtojson(file: String) {
 		print(error)
 	}
 	var jsonfile: URL
-	let encoder = JSONEncoder()
+	let encoder: JSONEncoder = JSONEncoder()
 	encoder.outputFormatting = .prettyPrinted
 	do {
 		jsonfile = try FileManager.default.url(
